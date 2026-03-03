@@ -1,4 +1,4 @@
-﻿# ===== WinOptimizer Bootstrap PRO =====
+# ===== WinOptimizer Bootstrap PRO =====
 
 $ErrorActionPreference = "Stop"
 
