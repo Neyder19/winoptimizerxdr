@@ -1,4 +1,4 @@
-# ===== WinOptimizer Bootstrap PRO =====
+﻿# ===== WinOptimizer Bootstrap PRO =====
 
 $ErrorActionPreference = "Stop"
 
@@ -41,6 +41,8 @@ catch {
 Write-Host "Ejecutando WinOptimizer..." -ForegroundColor Green
 
 # Ejecutar en el scope global para que el menú funcione
-Invoke-Expression $code.Content
+# limpiar BOM si existe
+$clean = $code.Content -replace "^\uFEFF", ""
+Invoke-Expression $clean
 
 Write-Host "`nBootstrap finalizado." -ForegroundColor DarkGray
