@@ -245,3 +245,48 @@ do {
     }
 
 } while ($true)
+
+# =========================================================
+# AUTO-INICIO CUANDO SE EJECUTA REMOTAMENTE
+# =========================================================
+
+if ($MyInvocation.InvocationName -ne '.') {
+    try {
+        Write-Host "`nIniciando WinOptimizer XDR Pro..." -ForegroundColor Cyan
+    } catch {}
+
+    # Mostrar menú automáticamente
+    do {
+        Write-Host "`n[1] Ejecutar optimización completa"
+        Write-Host "[2] Solo auditoría"
+        Write-Host "[3] Ver score"
+        Write-Host "[4] Generar reporte"
+        Write-Host "[5] Salir"
+
+        $choice = Read-Host "Seleccione opción"
+
+        switch ($choice) {
+            "1" {
+                Optimize-SystemHardening
+                Start-DebloatAggressive
+                Analyze-AttackSurface
+                Generate-Report
+                Pause
+            }
+            "2" {
+                $Global:AuditMode = $true
+                Write-Host "Modo auditoría activado"
+                Pause
+            }
+            "3" {
+                Write-Host "Score: $Global:Score"
+                Pause
+            }
+            "4" {
+                Generate-Report
+                Pause
+            }
+            "5" { break }
+        }
+    } while ($true)
+}
